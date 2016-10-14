@@ -25,7 +25,7 @@ $charset_collate = $wpdb->get_charset_collate();
 $sql = "CREATE TABLE $table_name (
   id mediumint(9) NOT NULL AUTO_INCREMENT,
   user_id mediumint(9) NOT NULL UNIQUE,
-  avatar_url varchar(55),
+  avatar_url varchar,
   PRIMARY KEY  (id)
 ) $charset_collate;";
 
@@ -57,7 +57,7 @@ function gravatar_or_default_get_avatar($avatar, $id_or_email, $size, $default, 
 
     if ( $user && is_object( $user ) ) {
       $table = $wpdb->prefix . "user_avatars";
-      $url = $wpdb->get_results('SELECT avatar_url FROM ' . $table . ' WHERE user_id="' . $user->ID . '"');
+      $url = $wpdb->get_var('SELECT avatar_url FROM ' . $table . ' WHERE user_id="' . $user->ID . '"');
       if($url != NULL && $url != '')
       {
         $avatar = "<img alt='{$alt}' src='{$url}' class='avatar avatar-{$size} photo' height='{$size}' width='{$size}' />";
