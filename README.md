@@ -1,0 +1,1 @@
+# wp-gravatar-or-default
