@@ -1,13 +1,13 @@
 <?php
 /**
  * @package gravatar-or-default
- * @version 0.1
+ * @version 0.2
  */
  /*
  Plugin Name: Gravatar or Default
  Plugin URI: https://github.com/ryanvade/wp-gravatar-or-default
  Description: Allow users to choose either Gravatar or a default avatar.
- Version: 0.1.0
+ Version: 0.1.1
  Author: Ryan Owens
  Author URI: https://github.com/ryanvade
  License: GPLv3 or later
@@ -19,6 +19,7 @@
 function gravatar_or_default_add_table()
 {
   global $wpdb;
+switch_to_blog (1);
 $table_name = $wpdb->prefix . "user_avatars";
 $charset_collate = $wpdb->get_charset_collate();
 
@@ -38,7 +39,7 @@ function gravatar_or_default_get_avatar($avatar, $id_or_email, $size, $default, 
   $user = false;
   $avatar = "";
   global $wpdb;
-
+  switch_to_blog (1);
     if ( is_numeric( $id_or_email ) ) {
 
         $id = (int) $id_or_email;
